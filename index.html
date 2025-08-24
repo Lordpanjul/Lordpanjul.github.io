@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Stack Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --secondary: #10b981;
+            --dark-bg: #111827;
+            --dark-card: #1f2937;
+            --light-bg: #f8fafc;
+            --light-card: #ffffff;
+            --text-dark: #1f2937;
+            --text-light: #f8fafc;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            transition: all 0.3s ease;
+            min-height: 100vh;
+        }
+
+        body.dark {
+            background: var(--dark-bg);
+            color: var(--text-light);
+        }
+
+        body.light {
+            background: var(--light-bg);
+            color: var(--text-dark);
+        }
+
+        .card {
+            transition: all 0.3s ease;
+            border-radius: 12px;
+        }
+
+        body.dark .card {
+            background: var(--dark-card);
+        }
+
+        body.light .card {
+            background: var(--light-card);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .bounce {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .skill-icon {
+            transition: all 0.3s ease;
+        }
+
+        .skill-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-toggle {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(180deg);
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.6s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .stagger-item {
+            opacity: 0;
+            animation: fadeIn 0.6s ease-in forwards;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tech-icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            margin-right: 4px;
+            vertical-align: middle;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body class="dark">
+    <!-- Theme Toggle -->
+    <div class="fixed top-4 right-4 z-50">
+        <div class="theme-toggle p-2 rounded-full bg-gray-700 text-white" onclick="toggleTheme()">
+            <span id="theme-icon">🌙</span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="text-center py-16 px-4">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4 gradient-text">Multi-Stack Developer</h1>
+        <p class="text-lg md:text-xl opacity-80 mb-8">Web • Game • AppSheet • IoT</p>
+        
+        <div class="flex justify-center space-x-6 mb-12">
+            <div class="bounce skill-icon text-4xl">💻</div>
+            <div class="bounce skill-icon text-4xl" style="animation-delay: 0.2s">🎮</div>
+            <div class="bounce skill-icon text-4xl" style="animation-delay: 0.4s">📱</div>
+            <div class="bounce skill-icon text-4xl" style="animation-delay: 0.6s">🔌</div>
+        </div>
+
+        <div class="space-x-4">
+            <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                View Projects
+            </button>
+            <button class="border border-gray-400 px-6 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                Contact
+            </button>
+        </div>
+    </header>
+
+    <!-- Skills Section -->
+    <section class="py-12 px-4 max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-12">Skills & Expertise</h2>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Web Development -->
+            <div class="card p-6 text-center fade-in">
+                <div class="text-5xl mb-4 bounce">💻</div>
+                <h3 class="text-xl font-semibold mb-2">Web Development</h3>
+                <p class="opacity-80 text-sm">React, Vue, Node.js, TypeScript, Responsive Design</p>
+            </div>
+
+            <!-- Game Development -->
+            <div class="card p-6 text-center fade-in" style="animation-delay: 0.2s">
+                <div class="text-5xl mb-4 bounce">🎮</div>
+                <h3 class="text-xl font-semibold mb-2">Game Development</h3>
+                <p class="opacity-80 text-sm">Unity, Godot, JavaScript Games, 2D/3D Graphics</p>
+            </div>
+
+            <!-- AppSheet Development -->
+            <div class="card p-6 text-center fade-in" style="animation-delay: 0.4s">
+                <div class="text-5xl mb-4 bounce">📱</div>
+                <h3 class="text-xl font-semibold mb-2">AppSheet Development</h3>
+                <p class="opacity-80 text-sm">No-code Apps, Google Workspace, Automation, Data Integration</p>
+            </div>
+
+            <!-- IoT Development -->
+            <div class="card p-6 text-center fade-in" style="animation-delay: 0.6s">
+                <div class="text-5xl mb-4 bounce">🔌</div>
+                <h3 class="text-xl font-semibold mb-2">IoT Development</h3>
+                <p class="opacity-80 text-sm">Arduino, Raspberry Pi, Sensors, Embedded Systems, MQTT</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="py-12 px-4 max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-12">Featured Projects</h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Project 1 -->
+            <div class="card p-6 stagger-item">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop" alt="Modern responsive web application dashboard with charts and analytics" class="project-image">
+                <div class="flex items-center mb-4">
+                    <span class="text-3xl mr-3">🌐</span>
+                    <h3 class="text-xl font-semibold">Responsive Web App</h3>
+                </div>
+                <p class="opacity-80 mb-4">Modern React application with real-time data and responsive design</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded text-sm flex items-center">
+                        <span class="tech-icon">⚛️</span> React
+                    </span>
+                    <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded text-sm flex items-center">
+                        <span class="tech-icon">🟢</span> Node.js
+                    </span>
+                    <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-3 py-1 rounded text-sm flex items-center">
+                        <span class="tech-icon">📱</span> Responsive
+                    </span>
+                </div>
+                <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    View Project
+                </button>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="card p-6 stagger-item" style="animation-delay: 0.1s">
+                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=200&fit=crop" alt="2D browser game with colorful characters and gaming interface" class="project-image">
+                <div class="flex items-center mb-4">
+                    <span class="text-3xl mr-3">🎯</span>
+                    <h3 class="text-xl font-semibold">2D Browser Game</h3>
+                </div>
+                <p class="opacity-80 mb-4">Interactive JavaScript game with Canvas API and physics engine</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-3 py-1 rounded text-sm flex items-center">
+                        <span class="tech-icon">🟨</span> JavaScript
+                    </span>
+                    <span class="bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 px-3 py-1 rounded text-sm flex items-center">
+                        <span class="tech-icon">🎨</span> Canvas
+                    </span>
+                    <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded text-sm flex items-center">
+                        <span class="tech-icon">⚡</span> Physics
+                    </span>
+                </div>
+                <button class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
+                    Play Game
+                </button>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="card p-6 stagger-item" style="animation-delay: 0.2s">
+                <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=200&fit=crop" alt="Business application dashboard showing data analytics and reports" class="project-image">
+                <div class="flex items-center mb-4">
+                    <span class="text-3xl mr-3">📊</span>
+                    <h3 class="text-xl font-semibold">Business App</h3>
+                </div>
+                <p class="opacity-80 mb-4">AppSheet application for inventory management and sales tracking</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded text-sm flex items-center">
+                        <span class="tech-icon">📱</span> AppSheet
+                    </span>
+                    <span class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded text-sm flex items-center">
+                        <span class="tech-icon">📊</span> Google Sheets
+                    </span>
+                    <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded text-sm flex items-center">
+                        <span class="tech-icon">🤖</span> Automation
+                    </span>
+                </div>
+                <button class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                    View App
+                </button>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="card p-6 stagger-item" style="animation-delay: 0.3s">
+                <img src="https://images.unsplash.com/photo-1560243565-6bab9f5bb66d?w=400&h=200&fit=crop" alt="Smart home IoT system with connected devices and control interface" class="project-image">
+                <div class="flex items-center mb-4">
+                    <span class="text-3xl mr-3">🏠</span>
+                    <h3 class="text-xl font-semibold">Smart Home System</h3>
+                </div>
+                <p class="opacity-80 mb-4">IoT solution for home automation with sensor monitoring</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-3 py-1 rounded text-sm flex items-center">
+                        <span class="tech-icon">🔧</span> Arduino
+                    </span>
+                    <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded text-sm flex items-center">
+                        <span class="tech-icon">☁️</span> MQTT
+                    </span>
+                    <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded text-sm flex items-center">
+                        <span class="tech-icon">📡</span> Sensors
+                    </span>
+                </div>
+                <button class="w-full bg-orange-600 text-white py-2 rounded-lg hover:bg-orange-700 transition-colors">
+                    View System
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-12 px-4 max-w-2xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-8">Get In Touch</h2>
+        
+        <div class="card p-6">
+            <form class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Name</label>
+                    <input type="text" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-transparent" placeholder="Your Name">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Email</label>
+                    <input type="email" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-transparent" placeholder="your@email.com">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Message</label>
+                    <textarea rows="4" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-transparent" placeholder="Hello..."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center border-t border-gray-700 dark:border-gray-600 mt-12">
+        <div class="flex justify-center space-x-6 mb-4">
+            <a href="#" class="opacity-70 hover:opacity-100 transition-opacity">GitHub</a>
+            <a href="#" class="opacity-70 hover:opacity-100 transition-opacity">LinkedIn</a>
+            <a href="#" class="opacity-70 hover:opacity-100 transition-opacity">Twitter</a>
+        </div>
+        <p class="opacity-60">© 2024 Multi-Stack Developer. Built with simplicity.</p>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            
+            if (body.classList.contains('dark')) {
+                body.classList.remove('dark');
+                body.classList.add('light');
+                themeIcon.textContent = '☀️';
+            } else {
+                body.classList.remove('light');
+                body.classList.add('dark');
+                themeIcon.textContent = '🌙';
+            }
+            
+            // Save theme preference
+            localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+        }
+
+        // Load saved theme
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            const themeIcon = document.getElementById('theme-icon');
+            
+            document.body.classList.add(savedTheme);
+            themeIcon.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+        }
+
+        // Stagger animations
+        function initStaggerAnimations() {
+            const staggerItems = document.querySelectorAll('.stagger-item');
+            staggerItems.forEach((item, index) => {
+                item.style.animationDelay = `${index * 0.1}s`;
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTheme();
+            initStaggerAnimations();
+            
+            // Simple form handling
+            document.querySelector('form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Message sent! (This is a demo)');
+                this.reset();
+            });
+        });
+
+        // Add some interactive elements
+        document.querySelectorAll('.skill-icon').forEach(icon => {
+            icon.addEventListener('click', () => {
+                icon.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    icon.style.transform = 'scale(1)';
+                }, 300);
+            });
+        });
+
+        // Project image hover effect
+        document.querySelectorAll('.project-image').forEach(img => {
+            img.addEventListener('mouseenter', () => {
+                img.style.transform = 'scale(1.02)';
+                img.style.transition = 'transform 0.3s ease';
+            });
+            
+            img.addEventListener('mouseleave', () => {
+                img.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
+
