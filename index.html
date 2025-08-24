@@ -3,48 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-Stack Developer Portfolio</title>
+    <title>Panji Kurniawan - Multi-Stack Developer Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
             --primary: #3b82f6;
             --secondary: #10b981;
-            --dark-bg: #111827;
-            --dark-card: #1f2937;
+            --accent: #f59e0b;
+            --dark-bg: #0f172a;
+            --dark-card: #1e293b;
+            --dark-text: #f1f5f9;
             --light-bg: #f8fafc;
             --light-card: #ffffff;
-            --text-dark: #1f2937;
-            --text-light: #f8fafc;
+            --light-text: #1e293b;
+            --gradient-start: #3b82f6;
+            --gradient-end: #10b981;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             min-height: 100vh;
-        }
-
-        body.dark {
             background: var(--dark-bg);
-            color: var(--text-light);
+            color: var(--dark-text);
         }
 
         body.light {
             background: var(--light-bg);
-            color: var(--text-dark);
+            color: var(--light-text);
         }
 
         .card {
             transition: all 0.3s ease;
-            border-radius: 12px;
-        }
-
-        body.dark .card {
-            background: var(--dark-card);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid transparent;
+            background: linear-gradient(var(--dark-card), var(--dark-card)) padding-box,
+                        linear-gradient(145deg, var(--primary), transparent) border-box;
         }
 
         body.light .card {
-            background: var(--light-card);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(var(--light-card), var(--light-card)) padding-box,
+                        linear-gradient(145deg, var(--primary), transparent) border-box;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         .bounce {
@@ -56,232 +57,408 @@
                 transform: translateY(0);
             }
             40% {
-                transform: translateY(-10px);
+                transform: translateY(-12px);
             }
             60% {
-                transform: translateY(-5px);
+                transform: translateY(-6px);
             }
+        }
+
+        .theme-toggle {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            background: linear-gradient(145deg, var(--primary), var(--secondary));
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(180deg) scale(1.1);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .glow {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .glow:hover {
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
         }
 
         .skill-icon {
             transition: all 0.3s ease;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
         }
 
         .skill-icon:hover {
-            transform: scale(1.1);
-        }
-
-        .theme-toggle {
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .theme-toggle:hover {
-            transform: rotate(180deg);
-        }
-
-        .fade-in {
-            opacity: 0;
-            animation: fadeIn 0.6s ease-in forwards;
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-
-        .stagger-item {
-            opacity: 0;
-            animation: fadeIn 0.6s ease-in forwards;
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .tech-icon {
-            width: 20px;
-            height: 20px;
-            display: inline-block;
-            margin-right: 4px;
-            vertical-align: middle;
+            transform: scale(1.2) rotate(5deg);
+            filter: drop-shadow(0 6px 12px rgba(59, 130, 246, 0.4));
         }
 
         .project-image {
             width: 100%;
             height: 200px;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 12px;
             margin-bottom: 16px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            background: linear-gradient(var(--dark-card), var(--dark-card)) padding-box,
+                        linear-gradient(145deg, var(--primary), var(--secondary)) border-box;
+        }
+
+        body.light .project-image {
+            background: linear-gradient(var(--light-card), var(--light-card)) padding-box,
+                        linear-gradient(145deg, var(--primary), var(--secondary)) border-box;
+        }
+
+        .project-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .tech-icon {
+            transition: all 0.3s ease;
+        }
+
+        .tech-icon:hover {
+            transform: scale(1.2);
+        }
+
+        .social-icon {
+            transition: all 0.3s ease;
+            background: linear-gradient(145deg, var(--primary), var(--secondary));
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .profile-photo {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid transparent;
+            background: linear-gradient(#000, #000) padding-box,
+                        linear-gradient(145deg, var(--primary), var(--secondary)) border-box;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(59, 130, 246, 0.4);
+        }
+
+        body.light .profile-photo {
+            background: linear-gradient(#fff, #fff) padding-box,
+                        linear-gradient(145deg, var(--primary), var(--secondary)) border-box;
+        }
+
+        /* Floating animation for background elements */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Glass morphism effect */
+        .glass {
+            backdrop-filter: blur(16px) saturate(180%);
+            background: rgba(17, 25, 40, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.125);
+        }
+
+        body.light .glass {
+            background: rgba(255, 255, 255, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-card);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--secondary));
+            border-radius: 4px;
+        }
+
+        body.light ::-webkit-scrollbar-track {
+            background: var(--light-card);
+        }
+
+        /* Input focus effects */
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Button hover effects */
+        .btn-primary {
+            background: linear-gradient(145deg, var(--primary), var(--secondary));
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Section transitions */
+        section {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body class="dark">
+    <!-- Animated Background Elements -->
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <div class="absolute top-20 left-10 w-4 h-4 bg-blue-500 rounded-full opacity-20 floating" style="animation-delay: 0s;"></div>
+        <div class="absolute top-40 right-20 w-6 h-6 bg-green-500 rounded-full opacity-20 floating" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-20 left-20 w-3 h-3 bg-orange-500 rounded-full opacity-20 floating" style="animation-delay: 2s;"></div>
+        <div class="absolute bottom-40 right-10 w-5 h-5 bg-purple-500 rounded-full opacity-20 floating" style="animation-delay: 3s;"></div>
+    </div>
+
     <!-- Theme Toggle -->
-    <div class="fixed top-4 right-4 z-50">
-        <div class="theme-toggle p-2 rounded-full bg-gray-700 text-white" onclick="toggleTheme()">
-            <span id="theme-icon">🌙</span>
+    <div class="fixed top-6 right-6 z-50">
+        <div class="theme-toggle p-3 rounded-full text-white" onclick="toggleTheme()">
+            <span id="theme-icon" class="text-xl">🌙</span>
         </div>
     </div>
 
     <!-- Header -->
-    <header class="text-center py-16 px-4">
-        <h1 class="text-4xl md:text-6xl font-bold mb-4 gradient-text">Multi-Stack Developer</h1>
-        <p class="text-lg md:text-xl opacity-80 mb-8">Web • Game • AppSheet • IoT</p>
+    <header class="text-center py-20 px-4">
+        <!-- Profile Photo -->
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face" 
+             alt="Professional portrait of Panji Kurniawan, a multi-stack developer from Bandung, Indonesia" 
+             class="profile-photo mx-auto mb-6">
         
-        <div class="flex justify-center space-x-6 mb-12">
-            <div class="bounce skill-icon text-4xl">💻</div>
-            <div class="bounce skill-icon text-4xl" style="animation-delay: 0.2s">🎮</div>
-            <div class="bounce skill-icon text-4xl" style="animation-delay: 0.4s">📱</div>
-            <div class="bounce skill-icon text-4xl" style="animation-delay: 0.6s">🔌</div>
+        <h1 class="text-5xl md:text-7xl font-bold mb-4 gradient-text">Panji Kurniawan</h1>
+        <p class="text-xl md:text-2xl opacity-80 mb-6">Multi-Stack Developer</p>
+        <div class="flex justify-center space-x-8 mb-14">
+            <div class="bounce skill-icon text-5xl">💻</div>
+            <div class="bounce skill-icon text-5xl" style="animation-delay: 0.2s">🎮</div>
+            <div class="bounce skill-icon text-5xl" style="animation-delay: 0.4s">📱</div>
+            <div class="bounce skill-icon text-5xl" style="animation-delay: 0.6s">🔌</div>
         </div>
 
-        <div class="space-x-4">
-            <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+            <!-- About Me Section -->
+    <section id="about" class="py-16 px-4 max-w-5xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-12 gradient-text">About Me</h2>
+        
+        <div class="card p-10 glass text-center">
+            <p class="text-lg leading-relaxed opacity-90 mb-8">
+                Halo 👋, saya <span class="font-semibold text-blue-400">Panji Kurniawan</span>, 
+                seorang <span class="font-semibold">Multi-Stack Developer</span> dari Bandung, Indonesia. 
+                Saya memiliki pengalaman di pengembangan <span class="text-blue-300">web modern</span>, 
+                <span class="text-green-300">game interaktif</span>, 
+                <span class="text-orange-300">aplikasi AppSheet</span>, dan 
+                <span class="text-purple-300">IoT</span>.  
+                Fokus saya adalah menciptakan solusi yang <span class="font-semibold">efisien, inovatif, dan user-friendly</span>.  
+                Saya antusias berkolaborasi dalam proyek-proyek yang memberikan dampak nyata bagi bisnis maupun masyarakat.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <button onclick="scrollToSection('projects')" class="btn-primary text-white px-8 py-3 rounded-full font-semibold text-lg glow">
                 View Projects
-            </button>
-            <button class="border border-gray-400 px-6 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-                Contact
-            </button>
+                </button>
+                <!-- Download CV Button -->
+                <a href="assets/Panji-Kurniawan-CV.pdf" download 
+                   class="btn-primary text-white px-8 py-3 rounded-full font-semibold text-lg glow">
+                    Download CV
+                </a>
+                <button onclick="scrollToSection('contact')" 
+                        class="btn-primary text-white px-8 py-3 rounded-full font-semibold text-lg glow">
+                    Contact Me
+                </button>
+                
+            </div>
         </div>
+    </section>
     </header>
 
     <!-- Skills Section -->
-    <section class="py-12 px-4 max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold text-center mb-12">Skills & Expertise</h2>
+    <section class="py-16 px-4 max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-16 gradient-text">Skills & Expertise</h2>
         
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <!-- Web Development -->
-            <div class="card p-6 text-center fade-in">
-                <div class="text-5xl mb-4 bounce">💻</div>
-                <h3 class="text-xl font-semibold mb-2">Web Development</h3>
-                <p class="opacity-80 text-sm">React, Vue, Node.js, TypeScript, Responsive Design</p>
+            <div class="card p-8 text-center glass">
+                <div class="text-6xl mb-6 bounce">💻</div>
+                <h3 class="text-xl font-semibold mb-4 text-blue-300">Web Development</h3>
+                <p class="opacity-80">React, Vue, Node.js, TypeScript, Responsive Design</p>
             </div>
 
             <!-- Game Development -->
-            <div class="card p-6 text-center fade-in" style="animation-delay: 0.2s">
-                <div class="text-5xl mb-4 bounce">🎮</div>
-                <h3 class="text-xl font-semibold mb-2">Game Development</h3>
-                <p class="opacity-80 text-sm">Unity, Godot, JavaScript Games, 2D/3D Graphics</p>
+            <div class="card p-8 text-center glass">
+                <div class="text-6xl mb-6 bounce">🎮</div>
+                <h3 class="text-xl font-semibold mb-4 text-green-300">Game Development</h3>
+                <p class="opacity-80">Unity, Godot, JavaScript Games, 2D/3D Graphics</p>
             </div>
 
             <!-- AppSheet Development -->
-            <div class="card p-6 text-center fade-in" style="animation-delay: 0.4s">
-                <div class="text-5xl mb-4 bounce">📱</div>
-                <h3 class="text-xl font-semibold mb-2">AppSheet Development</h3>
-                <p class="opacity-80 text-sm">No-code Apps, Google Workspace, Automation, Data Integration</p>
+            <div class="card p-8 text-center glass">
+                <div class="text-6xl mb-6 bounce">📱</div>
+                <h3 class="text-xl font-semibold mb-4 text-orange-300">AppSheet Development</h3>
+                <p class="opacity-80">No-code Apps, Google Workspace, Automation, Data Integration</p>
             </div>
 
             <!-- IoT Development -->
-            <div class="card p-6 text-center fade-in" style="animation-delay: 0.6s">
-                <div class="text-5xl mb-4 bounce">🔌</div>
-                <h3 class="text-xl font-semibold mb-2">IoT Development</h3>
-                <p class="opacity-80 text-sm">Arduino, Raspberry Pi, Sensors, Embedded Systems, MQTT</p>
+            <div class="card p-8 text-center glass">
+                <div class="text-6xl mb-6 bounce">🔌</div>
+                <h3 class="text-xl font-semibold mb-4 text-purple-300">IoT Development</h3>
+                <p class="opacity-80">Arduino, Raspberry Pi, Sensors, Embedded Systems, MQTT</p>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section class="py-12 px-4 max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold text-center mb-12">Featured Projects</h2>
+    <section id="projects" class="py-16 px-4 max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-16 gradient-text">Featured Projects</h2>
         
-        <div class="grid md:grid-cols-2 gap-8">
+        <div class="grid md:grid-cols-2 gap-10">
             <!-- Project 1 -->
-            <div class="card p-6 stagger-item">
+            <div class="card p-8 glass">
                 <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop" alt="Modern responsive web application dashboard with charts and analytics" class="project-image">
-                <div class="flex items-center mb-4">
-                    <span class="text-3xl mr-3">🌐</span>
-                    <h3 class="text-xl font-semibold">Responsive Web App</h3>
+                <div class="flex items-center mb-6">
+                    <span class="text-4xl mr-4">🌐</span>
+                    <h3 class="text-2xl font-semibold text-blue-300">Responsive Web App</h3>
                 </div>
-                <p class="opacity-80 mb-4">Modern React application with real-time data and responsive design</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                    <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded text-sm flex items-center">
+                <p class="opacity-80 mb-6 leading-relaxed">Modern React application with real-time data and responsive design</p>
+                <div class="flex flex-wrap gap-3 mb-6">
+                    <span class="bg-blue-500/20 text-blue-300 px-4 py-2 rounded-full text-sm flex items-center">
                         <span class="tech-icon">⚛️</span> React
                     </span>
-                    <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded text-sm flex items-center">
+                    <span class="bg-green-500/20 text-green-300 px-4 py-2 rounded-full text-sm flex items-center">
                         <span class="tech-icon">🟢</span> Node.js
                     </span>
-                    <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-3 py-1 rounded text-sm flex items-center">
+                    <span class="bg-yellow-500/20 text-yellow-300 px-4 py-2 rounded-full text-sm flex items-center">
                         <span class="tech-icon">📱</span> Responsive
                     </span>
                 </div>
-                <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                <button class="w-full btn-primary text-white py-3 rounded-xl font-semibold text-lg">
                     View Project
                 </button>
             </div>
 
             <!-- Project 2 -->
-            <div class="card p-6 stagger-item" style="animation-delay: 0.1s">
+            <div class="card p-8 glass">
                 <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=200&fit=crop" alt="2D browser game with colorful characters and gaming interface" class="project-image">
-                <div class="flex items-center mb-4">
-                    <span class="text-3xl mr-3">🎯</span>
-                    <h3 class="text-xl font-semibold">2D Browser Game</h3>
+                <div class="flex items-center mb-6">
+                    <span class="text-4xl mr-4">🎯</span>
+                    <h3 class="text-2xl font-semibold text-green-300">2D Browser Game</h3>
                 </div>
-                <p class="opacity-80 mb-4">Interactive JavaScript game with Canvas API and physics engine</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                    <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-3 py-1 rounded text-sm flex items-center">
+                <p class="opacity-80 mb-6 leading-relaxed">Interactive JavaScript game with Canvas API and physics engine</p>
+                <div class="flex flex-wrap gap-3 mb-6">
+                    <span class="bg-yellow-500/20 text-yellow-300 px-4 py-2 rounded-full text-sm flex items-center">
                         <span class="tech-icon">🟨</span> JavaScript
                     </span>
-                    <span class="bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 px-3 py-1 rounded text-sm flex items-center">
+                    <span class="bg-red-500/20 text-red-300 px-4 py-2 rounded-full text-sm flex items-center">
                         <span class="tech-icon">🎨</span> Canvas
                     </span>
-                    <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded text-sm flex items-center">
+                    <span class="bg-purple-500/20 text-purple-300 px-4 py-2 rounded-full text-sm flex items-center">
                         <span class="tech-icon">⚡</span> Physics
                     </span>
                 </div>
-                <button class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
+                <button class="w-full btn-primary text-white py-3 rounded-xl font-semibold text-lg">
                     Play Game
                 </button>
             </div>
 
             <!-- Project 3 -->
-            <div class="card p-6 stagger-item" style="animation-delay: 0.2s">
+            <div class="card p-8 glass">
                 <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=200&fit=crop" alt="Business application dashboard showing data analytics and reports" class="project-image">
-                <div class="flex items-center mb-4">
-                    <span class="text-3xl mr-3">📊</span>
-                    <h3 class="text-xl font-semibold">Business App</h3>
+                <div class="flex items-center mb-6">
+                    <span class="text-4xl mr-4">📊</span>
+                    <h3 class="text-2xl font-semibold text-orange-300">Business App</h3>
                 </div>
-                <p class="opacity-80 mb-4">AppSheet application for inventory management and sales tracking</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                    <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded text-sm flex items-center">
+                <p class="opacity-80 mb-6 leading-relaxed">AppSheet application for inventory management and sales tracking</p>
+                <div class="flex flex-wrap gap-3 mb-6">
+                    <span class="bg-purple-500/20 text-purple-300 px-4 py-2 rounded-full text-sm flex items-center">
                         <span class="tech-icon">📱</span> AppSheet
                     </span>
-                    <span class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded text-sm flex items-center">
+                    <span class="bg-gray-500/20 text-gray-300 px-4 py-2 rounded-full text-sm flex items-center">
                         <span class="tech-icon">📊</span> Google Sheets
                     </span>
-                    <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded text-sm flex items-center">
+                    <span class="bg-blue-500/20 text-blue-300 px-4 py-2 rounded-full text-sm flex items-center">
                         <span class="tech-icon">🤖</span> Automation
                     </span>
                 </div>
-                <button class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                <button class="w-full btn-primary text-white py-3 rounded-xl font-semibold text-lg">
                     View App
                 </button>
             </div>
 
             <!-- Project 4 -->
-            <div class="card p-6 stagger-item" style="animation-delay: 0.3s">
-                <img src="https://images.unsplash.com/photo-1560243565-6bab9f5bb66d?w=400&h=200&fit=crop" alt="Smart home IoT system with connected devices and control interface" class="project-image">
-                <div class="flex items-center mb-4">
-                    <span class="text-3xl mr-3">🏠</span>
-                    <h3 class="text-xl font-semibold">Smart Home System</h3>
+            <div class="card p-8 glass">
+                <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=200&fit=crop" alt="Smart home IoT system with connected devices, sensors and control dashboard" class="project-image">
+                <div class="flex items-center mb-6">
+                    <span class="text-4xl mr-4">🏠</span>
+                    <h3 class="text-2xl font-semibold text-purple-300">Smart Home System</h3>
                 </div>
-                <p class="opacity-80 mb-4">IoT solution for home automation with sensor monitoring</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                    <span class="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-3 py-1 rounded text-sm flex items-center">
+                <p class="opacity-80 mb-6 leading-relaxed">IoT solution for home automation with real-time sensor monitoring</p>
+                <div class="flex flex-wrap gap-3 mb-6">
+                    <span class="bg-orange-500/20 text-orange-300 px-4 py-2 rounded-full text-sm flex items-center">
                         <span class="tech-icon">🔧</span> Arduino
                     </span>
-                    <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded text-sm flex items-center">
+                    <span class="bg-blue-500/20 text-blue-300 px-4 py-2 rounded-full text-sm flex items-center">
                         <span class="tech-icon">☁️</span> MQTT
                     </span>
-                    <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded text-sm flex items-center">
+                    <span class="bg-green-500/20 text-green-300 px-4 py-2 rounded-full text-sm flex items-center">
                         <span class="tech-icon">📡</span> Sensors
                     </span>
                 </div>
-                <button class="w-full bg-orange-600 text-white py-2 rounded-lg hover:bg-orange-700 transition-colors">
+                <button class="w-full btn-primary text-white py-3 rounded-xl font-semibold text-lg">
                     View System
                 </button>
             </div>
@@ -289,61 +466,134 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="py-12 px-4 max-w-2xl mx-auto">
-        <h2 class="text-3xl font-bold text-center mb-8">Get In Touch</h2>
+    <section id="contact" class="py-16 px-4 max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-16 gradient-text">Get In Touch</h2>
         
-        <div class="card p-6">
-            <form class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium mb-2">Name</label>
-                    <input type="text" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-transparent" placeholder="Your Name">
+        <div class="grid md:grid-cols-2 gap-10">
+            <!-- Contact Information -->
+            <div class="card p-8 glass">
+                <h3 class="text-2xl font-semibold mb-8 text-blue-300">Let's Work Together</h3>
+                
+                <div class="space-y-6">
+                    <div class="flex items-center">
+                        <span class="text-2xl mr-4">👤</span>
+                        <div>
+                            <p class="font-semibold text-lg">Name</p>
+                            <p class="opacity-80">Panji Kurniawan</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <span class="text-2xl mr-4">📧</span>
+                        <div>
+                            <p class="font-semibold text-lg">Email</p>
+                            <p class="opacity-80">panji@kurniawan.dev</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <span class="text-2xl mr-4">📱</span>
+                        <div>
+                            <p class="font-semibold text-lg">Phone/WhatsApp</p>
+                            <p class="opacity-80">+62 812-3456-7890</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <span class="text-2xl mr-4">📍</span>
+                        <div>
+                            <p class="font-semibold text-lg">Location</p>
+                            <p class="opacity-80">Bandung, West Java, Indonesia</p>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium mb-2">Email</label>
-                    <input type="email" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-transparent" placeholder="your@email.com">
+
+                <div class="mt-10">
+                    <h4 class="font-semibold text-lg mb-6">Connect with me</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-icon p-3 rounded-lg text-white">
+                            GitHub
+                        </a>
+                        <a href="#" class="social-icon p-3 rounded-lg text-white">
+                            LinkedIn
+                        </a>
+                        <a href="#" class="social-icon p-3 rounded-lg text-white">
+                            Twitter
+                        </a>
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium mb-2">Message</label>
-                    <textarea rows="4" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-transparent" placeholder="Hello..."></textarea>
-                </div>
-                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                    Send Message
-                </button>
-            </form>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="card p-8 glass">
+                <h3 class="text-2xl font-semibold mb-8 text-green-300">Send a Message</h3>
+                
+                <form class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-3">First Name</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-transparent" placeholder="Your first name" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-3">Last Name</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-transparent" placeholder="Your last name">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-3">Email Address</label>
+                        <input type="email" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-transparent" placeholder="your@email.com" required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-3">Message</label>
+                        <textarea rows="5" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-transparent" placeholder="Tell me about your project..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full btn-primary text-white py-4 rounded-xl font-semibold text-lg">
+                        Send Message
+                    </button>
+                </form>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-8 text-center border-t border-gray-700 dark:border-gray-600 mt-12">
-        <div class="flex justify-center space-x-6 mb-4">
-            <a href="#" class="opacity-70 hover:opacity-100 transition-opacity">GitHub</a>
-            <a href="#" class="opacity-70 hover:opacity-100 transition-opacity">LinkedIn</a>
-            <a href="#" class="opacity-70 hover:opacity-100 transition-opacity">Twitter</a>
+    <footer class="py-12 text-center border-t border-gray-700 dark:border-gray-600 mt-16">
+        <div class="max-w-6xl mx-auto px-4">
+            <p class="opacity-60">© 2024 Panji Kurniawan. Built with passion from Bandung, Indonesia 🌋</p>
         </div>
-        <p class="opacity-60">© 2024 Multi-Stack Developer. Built with simplicity.</p>
     </footer>
 
     <script>
-        // Theme Toggle
+        // Enhanced Theme Toggle with smooth transition
         function toggleTheme() {
             const body = document.body;
             const themeIcon = document.getElementById('theme-icon');
+            
+            // Add transition class for smooth theme change
+            body.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
             
             if (body.classList.contains('dark')) {
                 body.classList.remove('dark');
                 body.classList.add('light');
                 themeIcon.textContent = '☀️';
+                themeIcon.style.transform = 'rotate(360deg)';
             } else {
                 body.classList.remove('light');
                 body.classList.add('dark');
                 themeIcon.textContent = '🌙';
+                themeIcon.style.transform = 'rotate(0deg)';
             }
             
-            // Save theme preference
+            setTimeout(() => {
+                body.style.transition = '';
+            }, 500);
+            
             localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
         }
 
-        // Load saved theme
+        // Load saved theme with animation
         function loadTheme() {
             const savedTheme = localStorage.getItem('theme') || 'dark';
             const themeIcon = document.getElementById('theme-icon');
@@ -352,49 +602,63 @@
             themeIcon.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
         }
 
-        // Stagger animations
-        function initStaggerAnimations() {
-            const staggerItems = document.querySelectorAll('.stagger-item');
-            staggerItems.forEach((item, index) => {
-                item.style.animationDelay = `${index * 0.1}s`;
+        // Smooth scroll to section with offset
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const offsetTop = section.offsetTop - 80;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Intersection Observer for section animations
+        function initIntersectionObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
             });
         }
 
-        // Initialize
+        // Initialize everything
         document.addEventListener('DOMContentLoaded', function() {
             loadTheme();
-            initStaggerAnimations();
+            initIntersectionObserver();
             
-            // Simple form handling
-            document.querySelector('form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Message sent! (This is a demo)');
-                this.reset();
+            // Add hover effects to all interactive elements
+            document.querySelectorAll('button, a, .card').forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    element.style.transform = 'translateY(-2px)';
+                });
+                element.addEventListener('mouseleave', () => {
+                    element.style.transform = 'translateY(0)';
+                });
             });
         });
 
-        // Add some interactive elements
-        document.querySelectorAll('.skill-icon').forEach(icon => {
-            icon.addEventListener('click', () => {
-                icon.style.transform = 'scale(1.2)';
-                setTimeout(() => {
-                    icon.style.transform = 'scale(1)';
-                }, 300);
-            });
-        });
-
-        // Project image hover effect
-        document.querySelectorAll('.project-image').forEach(img => {
-            img.addEventListener('mouseenter', () => {
-                img.style.transform = 'scale(1.02)';
-                img.style.transition = 'transform 0.3s ease';
-            });
+        // Add parallax effect to background elements
+        document.addEventListener('mousemove', (e) => {
+            const floatingElements = document.querySelectorAll('.floating');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
             
-            img.addEventListener('mouseleave', () => {
-                img.style.transform = 'scale(1)';
+            floatingElements.forEach((el, index) => {
+                const speed = 0.02 + (index * 0.01);
+                const xOffset = (x - 0.5) * 20 * speed;
+                const yOffset = (y - 0.5) * 20 * speed;
+                
+                el.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
             });
         });
     </script>
 </body>
 </html>
-
